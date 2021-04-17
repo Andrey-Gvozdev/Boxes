@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace Boxes
 {
     class Program
     {
+        public const int BOXCAPACITY = 5;
 
         static void Main(string[] args)
         {
@@ -64,33 +66,29 @@ namespace Boxes
                 Console.ReadKey();
 
                 Random rand = new Random();
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < BOXCAPACITY; i++)
                 {
                     int temp = rand.Next(1, 200);
                     while (true)
                     {
                         if (temp >= common.MinRarityValue && temp <= common.MaxRarityValue)
                         {
-                            temp = rand.Next(1, CommonObjectsList.Count);
-                            CaseList.Add(CommonObjectsList[temp]);
+                            AddItem(CommonObjectsList);
                             break;
                         }
                         if (temp >= rare.MinRarityValue && temp <= rare.MaxRarityValue)
                         {
-                            temp = rand.Next(1, RareObjectsList.Count);
-                            CaseList.Add(RareObjectsList[temp]);
+                            AddItem(RareObjectsList);
                             break;
                         }
                         if (temp >= mystical.MinRarityValue && temp <= mystical.MaxRarityValue)
                         {
-                            temp = rand.Next(1, MysticalObjectsList.Count);
-                            CaseList.Add(MysticalObjectsList[temp]);
+                            AddItem(MysticalObjectsList);
                             break;
                         }
                         if (temp >= legendary.MinRarityValue && temp <= legendary.MaxRarityValue)
                         {
-                            temp = rand.Next(1, LegendaryObjectsList.Count);
-                            CaseList.Add(LegendaryObjectsList[temp]);
+                            AddItem(LegendaryObjectsList);
                             break;
                         }
                         else
@@ -110,6 +108,15 @@ namespace Boxes
 
                 CaseList.Clear();
             }
+
+
+            void AddItem(List<DropObject> rarityObjectsList)
+            {
+                Random rand = new Random();
+                int temp = rand.Next(1, rarityObjectsList.Count);
+                CaseList.Add(rarityObjectsList[temp]);
+            }
+            
         }
 
     }
